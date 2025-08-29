@@ -31,10 +31,10 @@ def _clean_columns(df: pd.DataFrame) -> pd.DataFrame:
 
 def _numeric_scores(series: pd.Series) -> pd.Series:
     s = (series.astype(str)
-               .str.replace("点", "", regex=False)
-               .str.replace(",", "", regex=False)
-               .str.replace("　", "", regex=False)
-               .str.strip())
+        .str.replace("点", "", regex=False)
+        .str.replace(",", "", regex=False)
+        .str.replace("　", "", regex=False)
+        .str.strip())
     return pd.to_numeric(s, errors="coerce")
 
 # ---------- 円グラフ ----------
@@ -69,7 +69,7 @@ def create_pie_chart(df: pd.DataFrame, out_dir: Path) -> Path:
 
     ax.set_title("所属別参加者数の割合", fontsize=18, fontweight="bold", pad=18)
     ax.legend(wedges, [f"{n}（{c}名）" for n, c in counts.items()],
-              title="所属", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1), fontsize=10)
+            title="所属", loc="center left", bbox_to_anchor=(1, 0, 0.5, 1), fontsize=10)
     ax.axis("equal")
     plt.tight_layout()
     plt.savefig(out_path, bbox_inches="tight", dpi=200)
@@ -83,7 +83,7 @@ def create_bar_chart(df: pd.DataFrame, out_dir: Path) -> Path:
     out_path = out_dir / "bar_mean_score.png"
 
     mean_scores = (df.groupby("名前")["スコア"]
-                     .mean().round(1).sort_values(ascending=False))
+                    .mean().round(1).sort_values(ascending=False))
     if mean_scores.empty:
         print("⚠️ 平均スコアを計算できないため棒グラフをスキップ")
         return out_path
@@ -96,7 +96,7 @@ def create_bar_chart(df: pd.DataFrame, out_dir: Path) -> Path:
     colors = (PASTEL_PINKS * ((len(mean_scores) // len(PASTEL_PINKS)) + 1))[: len(mean_scores)]
 
     bars = ax.bar(range(len(mean_scores)), mean_scores.values,
-                  color=colors, edgecolor="#E91E63", linewidth=0.8, alpha=0.9)
+                color=colors, edgecolor="#E91E63", linewidth=0.8, alpha=0.9)
 
     ax.set_xlabel("参加者", fontsize=12, fontweight="bold")
     ax.set_xticks(range(len(mean_scores)))
@@ -110,7 +110,7 @@ def create_bar_chart(df: pd.DataFrame, out_dir: Path) -> Path:
     # 数値注記：白縁取り＋少し上に
     for x, (bar, score) in enumerate(zip(bars, mean_scores.values)):
         txt = ax.text(bar.get_x() + bar.get_width()/2, bar.get_height() + 0.8,
-                      f'{int(round(score))}', ha="center", va="bottom", fontsize=10, fontweight="bold")
+                    f'{int(round(score))}', ha="center", va="bottom", fontsize=10, fontweight="bold")
         txt.set_path_effects([withStroke(linewidth=3, foreground="white")])
 
     plt.tight_layout()
@@ -132,7 +132,7 @@ def create_histogram(df: pd.DataFrame, out_dir: Path) -> Path:
 
     # 視認性を優先して bins=15（データ量35前後にちょうど良い）
     n, bins, patches = ax.hist(scores, bins=15, color=PASTEL_PINKS[0],
-                               edgecolor="#E91E63", linewidth=1, alpha=0.75)
+                            edgecolor="#E91E63", linewidth=1, alpha=0.75)
 
     mean_score = float(np.mean(scores))
     median_score = float(np.median(scores))
