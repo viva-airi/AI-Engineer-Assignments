@@ -1,0 +1,9 @@
+# Windows の自動生成ファイル
+desktop.ini
+
+# 秘密情報ファイル
+.env
+
+# Python のキャッシュ
+__pycache__/
+*.pyc
