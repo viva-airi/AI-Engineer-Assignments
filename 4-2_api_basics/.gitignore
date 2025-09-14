@@ -44,3 +44,11 @@ ENV/
 # OS関連
 .DS_Store
 Thumbs.db
+
+#追加
+credentials/
+tokens/
+*credentials*.json
+*serviceaccount*.json
+client_secret*.json
+token.json
