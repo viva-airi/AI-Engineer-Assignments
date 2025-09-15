@@ -2,10 +2,25 @@
 .env
 .env.local
 .env.production
+# 任意の場所の .env（機密）
+**/*.env
+# ただしサンプルは残す
+!**/*.env.example
 
-# 認証情報
+# 認証情報（機密）
 credentials/
 tokens/
+*credentials*.json
+*serviceaccount*.json
+client_secret*.json
+token.json
+
+# 課題フォルダ内の機密
+4-2-2/env/*.env
+!4-2-2/env/*.env.example
+4-2-2/credentials/*
+4-2-2/tokens/*
+
 
 # Python関連
 __pycache__/
@@ -31,8 +46,8 @@ wheels/
 MANIFEST
 
 # 仮想環境
+.venv/
 venv/
-env/
 ENV/
 
 # IDE関連
@@ -45,10 +60,5 @@ ENV/
 .DS_Store
 Thumbs.db
 
-#追加
-credentials/
-tokens/
-*credentials*.json
-*serviceaccount*.json
-client_secret*.json
-token.json
+# 生成物（任意：YouTubeのCSVなど）
+4-2_api_basics/4-2-2/out/*
