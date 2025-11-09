@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.pyc
+
+# venv
+.venv/
+env/
+venv/
+
+# Credentials / Tokens
+credentials/
+tokens/
+*credentials*.json
+*serviceaccount*.json
+client_secret*.json
+token.json
+
+# Dotenv
+.env
+.env.*.local
+**/*.env
+!**/*.env.example
+
+# Logs
+*.log
+runlogs/
